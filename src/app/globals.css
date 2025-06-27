@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #8f95d3;
+  --foreground: #171717;
+  --fire-brick: #BB2323;
+}
