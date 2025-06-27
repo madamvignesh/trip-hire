@@ -9,7 +9,7 @@ import { MdDeleteOutline } from "react-icons/md";
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchError, setIsSearchError] = useState(false);
-  const [searchHistory, setSearchHistory] = useState([]);
+  const [searchHistory, setSearchHistory] = useState<{ role: string; content: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
