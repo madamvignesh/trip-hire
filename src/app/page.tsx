@@ -9,6 +9,7 @@ import { MdDeleteOutline } from "react-icons/md";
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState("");
+  const [isSearchError, setIsSearchError] = useState(false);
   const [searchHistory, setSearchHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,7 +21,6 @@ export default function Home() {
         method: "GET",
       });
       const data = await response.json();
-      setSearchResults(data.reply);
       const finalHistory = [{ role: "assistant", content: data.reply }];
       setSearchHistory(finalHistory);
       setIsLoading(false);
@@ -61,12 +61,12 @@ export default function Home() {
       const data = await res.json();
       const finalHistory = [...updatedHistory, { role: "assistant", content: data.reply }];
       setSearchHistory(finalHistory);
-      setSearchResults(data.reply);
       localStorage.setItem("tripChatHistory", JSON.stringify(finalHistory));
       setSearchQuery("");
     } catch (err) {
       console.error("Search error:", err);
       setSearchResults("Something went wrong. Try again.");
+      setIsSearchError(true);
     } finally {
       setIsLoading(false);
     }
@@ -144,6 +144,9 @@ export default function Home() {
           ))}
           {isLoading && (
             <p className="text-center text-cyan-200 animate-pulse">Loading your itinerary...</p>
+          )}
+          {isSearchError && (
+            <p className="text-center text-red-500">{searchResults}</p>
           )}
         </div>
       </div>
