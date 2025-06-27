@@ -8,7 +8,6 @@ import { MdDeleteOutline } from "react-icons/md";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState("");
   const [isSearchError, setIsSearchError] = useState(false);
   const [searchHistory, setSearchHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -65,7 +64,6 @@ export default function Home() {
       setSearchQuery("");
     } catch (err) {
       console.error("Search error:", err);
-      setSearchResults("Something went wrong. Try again.");
       setIsSearchError(true);
     } finally {
       setIsLoading(false);
@@ -146,7 +144,7 @@ export default function Home() {
             <p className="text-center text-cyan-200 animate-pulse">Loading your itinerary...</p>
           )}
           {isSearchError && (
-            <p className="text-center text-red-500">{searchResults}</p>
+            <p className="text-center text-red-500">Something went wrong. Please try again.</p>
           )}
         </div>
       </div>
