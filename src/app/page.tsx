@@ -33,12 +33,13 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const formatContent = (text) => {
+  const formatContent = (text: string) => {
     return text.split("* ").map((line, i) => {
       const bolded = line.replace(/\*(.*?)\*/g, '<strong>$1</strong>').replace("*", "");
       return <p key={i} dangerouslySetInnerHTML={{ __html: bolded }} className="text-white mb-3" />;
     });
   };
+
 
   const gettSearchResults = async () => {
     if (!searchQuery.trim()) return;
